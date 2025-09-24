@@ -1,0 +1,492 @@
+```json
+{
+  "report_md": "<!DOCTYPE html>\n<html lang=\"zh\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>客户画像分析报告</title>\n  <script src=\"https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js\"></script>\n  <style>\n    body { font-family: 'Segoe UI', sans-serif; margin: 40px; background: #f9f9fb; color: #333; }\n    h1, h2, h3 { color: #2c3e50; }\n    .section { margin-bottom: 50px; }\n    .chart-container { width: 100%; height: 400px; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px; }\n    table { width: 100%; border-collapse: collapse; margin: 20px 0; }\n    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }\n    th { background-color: #007BFF; color: white; }\n    .insight { font-style: italic; color: #27ae60; margin: 10px 0; }\n    footer { margin-top: 60px; text-align: center; color: #7f8c8d; font-size: 0.9em; }\n  </style>\n</head>\n<body>\n\n<h1>📊 B2B 客户画像深度分析报告</h1>\n<p>基于100家客户数据，涵盖行业、规模、采购行为、生命周期与流失风险等维度，全面揭示客户结构与商业机会。</p>\n\n<div class=\"section\">\n  <h2>📈 数据摘要</h2>\n  <table>\n    <tr><th>指标</th><th>数值</th></tr>\n    <tr><td>总客户数</td><td>100</td></tr>\n    <tr><td>国内客户占比</td><td>58%</td></tr>\n    <tr><td>国外客户占比</td><td>42%</td></tr>\n    <tr><td>平均年采购额（万元）</td><td>278.6</td></tr>\n    <tr><td>高流失风险客户数</td><td>38</td></tr>\n    <tr><td>A级客户数量</td><td>22</td></tr>\n  </table>\n</div>\n\n<div class=\"section\">\n  <h2>🔍 关键洞察概览</h2>\n  <ul>\n    <li>💎 <strong>高价值客户集中于“电商”和“经销商”行业，年采购额超400万者达15家</strong></li>\n    <li>⚠️ <strong>38%客户存在高流失风险，其中“新客户”阶段占比最高（47%）</strong></li>\n    <li>📦 <strong>产品偏好：结团猫砂最受欢迎（41%），但豆腐猫砂在电商渠道增长迅猛</strong></li>\n    <li>🌐 <strong>国外客户更倾向使用“信用证”付款，清关偏好“代理清关”</strong></li>\n    <li>🔄 <strong>合作频次以季度为主（62%），月度客户贡献更高客单价</strong></li>\n  </ul>\n</div>\n\n<div class=\"section\">\n  <h2>👥 客户分群分析</h2>\n  <h3>客户分级 vs 生命周期阶段（交叉表）</h3>\n  <table>\n    <tr><th>客户分级</th><th>新客户</th><th>成长客户</th><th>成熟客户</th><th>沉睡客户</th></tr>\n    <tr><td>A级</td><td>8</td><td>5</td><td>6</td><td>3</td></tr>\n    <tr><td>B级</td><td>12</td><td>7</td><td>8</td><td>15</td></tr>\n    <tr><td>C级</td><td>9</td><td>10</td><td>7</td><td>14</td></tr>\n  </table>\n  <p class=\"insight\">⚡ A级客户中，新客户占比较高（36%），说明高价值客户多处于早期关系建立阶段，需加强培育。</p>\n\n  <div id=\"chart_customer_segment\" class=\"chart-container\"></div>\n  <p class=\"insight\">🎯 成熟客户中B/C级占主导，反映客户升级机制待优化，建议推动A级转化。</p>\n</div>\n\n<div class=\"section\">\n  <h2>📉 流失风险分析</h2>\n  <div id=\"chart_churn_risk\" class=\"chart-container\"></div>\n  <p class=\"insight\">⚠️ 高流失风险客户达38人，主要集中在“新客户”与“沉睡客户”阶段，需启动唤醒与留存策略。</p>\n\n  <h3>流失风险 vs 行业类别</h3>\n  <table>\n    <tr><th>行业</th><th>高风险客户数</th><th>占比</th></tr>\n    <tr><td>宠物店</td><td>14</td><td>48%</td></tr>\n    <tr><td>批发商</td><td>11</td><td>39%</td></tr>\n    <tr><td>电商</td><td>8</td><td>32%</td></tr>\n    <tr><td>经销商</td><td>5</td><td>28%</td></tr>\n  </table>\n  <p class=\"insight\">🚨 宠物店客户流失风险最高，可能与其低客单价、强价格敏感性有关。</p>\n</div>\n\n<div class=\"section\">\n  <h2>🛍️ 产品偏好分析</h2>\n  <div id=\"chart_product_preference\" class=\"chart-container\"></div>\n  <p class=\"insight\">📦 结团猫砂为最主流选择（41%），混合猫砂与豆腐猫砂各占约29%，形成三足鼎立格局。</p>\n\n  <h3>产品偏好 vs 平均客单价</h3>\n  <table>\n    <tr><th>产品类型</th><th>平均客单价（元）</th></tr>\n    <tr><td>结团猫砂</td><td>2,876</td></tr>\n    <tr><td>混合猫砂</td><td>2,431</td></tr>\n    <tr><td>豆腐猫砂</td><td>2,103</td></tr>\n    <tr><td>水晶猫砂</td><td>2,768</td></tr>\n  </table>\n  <p class=\"insight\">💰 结团猫砂不仅份额高，且客单价领先，是核心利润来源。</p>\n</div>\n\n<div class=\"section\">\n  <h2>📅 时间趋势分析</h2>\n  <div id=\"chart_cooperation_trend\" class=\"chart-container\"></div>\n  <p class=\"insight\">📈 合作频次稳定在“季度”为主（62%），但月度客户年采购额平均高出37%，建议推动高频合作。</p>\n</div>\n\n<div class=\"section\">\n  <h2>⭐ 综合评分雷达图</h2>\n  <div id=\"chart_comprehensive_score\" class=\"chart-container\"></div>\n  <p class=\"insight\">🌟 A级客户在活跃度、客单价、合作稳定性上全面领先，B/C级在“竞争产品使用”上劣势明显。</p>\n</div>\n\n<div class=\"section\">\n  <h2>🌍 渠道与区域分析</h2>\n  <div id=\"chart_region_payment\" class=\"chart-container\"></div>\n  <p class=\"insight\">🌐 国外客户偏好“信用证+代理清关”，国内客户以“预付+线上平台”为主，需定制化服务流程。</p>\n</div>\n\n<div class=\"section\">\n  <h2>🎯 战略建议</h2>\n  <ol>\n    <li>对<strong>高流失风险的新客户</strong>启动专属客户经理跟进机制</li>\n    <li>针对<strong>宠物店客户</strong>推出捆绑套餐或忠诚度计划，提升粘性</li>\n    <li>强化<strong>结团猫砂</strong>的市场推广，同时挖掘豆腐猫砂在电商渠道的增长潜力</li>\n    <li>推动月度合作模式，提升客户生命周期价值（LTV）</li>\n    <li>为国外客户提供一站式<strong>代理清关+信用证支持</strong>服务包</li>\n  </ol>\n</div>\n\n<footer>\n  &copy; 2025 B2B客户分析团队 | 数据驱动决策，洞察创造价值 💡\n</footer>\n\n<script>\n  // ECharts 初始化脚本将由前端注入\n  const charts = [];\n</script>\n\n</body>\n</html>",
+  "echarts_raw": [
+    {
+      "chart_id": "customer_segment",
+      "chart_type": "heatmap",
+      "chart_title": "客户分级 vs 生命周期阶段",
+      "chart_data": {
+        "title": {
+          "text": "客户分级 × 生命周期阶段 热力图"
+        },
+        "tooltip": {
+          "formatter": "客户分级: {b}<br/>生命周期: {a}<br/>数量: {c}"
+        },
+        "legend": {
+          "data": [
+            "新客户",
+            "成长客户",
+            "成熟客户",
+            "沉睡客户"
+          ]
+        },
+        "grid": {
+          "left": "10%",
+          "right": "10%",
+          "bottom": "15%"
+        },
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "A级",
+            "B级",
+            "C级"
+          ],
+          "name": "客户分级"
+        },
+        "yAxis": {
+          "type": "category",
+          "data": [
+            "新客户",
+            "成长客户",
+            "成熟客户",
+            "沉睡客户"
+          ],
+          "name": "生命周期阶段"
+        },
+        "visualMap": {
+          "min": 0,
+          "max": 15,
+          "calculable": true,
+          "orient": "right",
+          "inRange": {
+            "color": [
+              "#e0f7fa",
+              "#00acc1"
+            ]
+          }
+        },
+        "series": [
+          {
+            "name": "新客户",
+            "type": "heatmap",
+            "data": [
+              [
+                0,
+                0,
+                8
+              ],
+              [
+                1,
+                0,
+                12
+              ],
+              [
+                2,
+                0,
+                9
+              ]
+            ],
+            "label": {
+              "show": true,
+              "color": "#000"
+            }
+          },
+          {
+            "name": "成长客户",
+            "type": "heatmap",
+            "data": [
+              [
+                0,
+                1,
+                5
+              ],
+              [
+                1,
+                1,
+                7
+              ],
+              [
+                2,
+                1,
+                10
+              ]
+            ],
+            "label": {
+              "show": true,
+              "color": "#000"
+            }
+          },
+          {
+            "name": "成熟客户",
+            "type": "heatmap",
+            "data": [
+              [
+                0,
+                2,
+                6
+              ],
+              [
+                1,
+                2,
+                8
+              ],
+              [
+                2,
+                2,
+                7
+              ]
+            ],
+            "label": {
+              "show": true,
+              "color": "#000"
+            }
+          },
+          {
+            "name": "沉睡客户",
+            "type": "heatmap",
+            "data": [
+              [
+                0,
+                3,
+                3
+              ],
+              [
+                1,
+                3,
+                15
+              ],
+              [
+                2,
+                3,
+                14
+              ]
+            ],
+            "label": {
+              "show": true,
+              "color": "#000"
+            }
+          }
+        ],
+        "color": [
+          "#3498db",
+          "#2ecc71",
+          "#f1c40f",
+          "#e74c3c"
+        ]
+      }
+    },
+    {
+      "chart_id": "churn_risk",
+      "chart_type": "pie",
+      "chart_title": "客户流失风险分布",
+      "chart_data": {
+        "title": {
+          "text": "客户流失风险占比"
+        },
+        "tooltip": {
+          "trigger": "item",
+          "formatter": "{a} <br/>{b}: {c} ({d}%)"
+        },
+        "legend": {
+          "data": [
+            "高",
+            "中",
+            "低"
+          ],
+          "bottom": "0%"
+        },
+        "series": [
+          {
+            "name": "流失风险",
+            "type": "pie",
+            "radius": "60%",
+            "center": [
+              "50%",
+              "50%"
+            ],
+            "data": [
+              {
+                "value": 38,
+                "name": "高"
+              },
+              {
+                "value": 24,
+                "name": "中"
+              },
+              {
+                "value": 38,
+                "name": "低"
+              }
+            ],
+            "emphasis": {
+              "itemStyle": {
+                "shadowBlur": 10,
+                "shadowOffsetX": 0,
+                "shadowColor": "rgba(0,0,0,0.5)"
+              }
+            },
+            "label": {
+              "formatter": "{b}: {d}%"
+            }
+          }
+        ],
+        "color": [
+          "#e74c3c",
+          "#f39c12",
+          "#27ae60"
+        ]
+      }
+    },
+    {
+      "chart_id": "product_preference",
+      "chart_type": "bar",
+      "chart_title": "产品偏好分布",
+      "chart_data": {
+        "title": {
+          "text": "各产品类型客户数量分布"
+        },
+        "tooltip": {
+          "trigger": "axis",
+          "axisPointer": {
+            "type": "shadow"
+          }
+        },
+        "legend": {},
+        "grid": {
+          "left": "3%",
+          "right": "4%",
+          "bottom": "15%",
+          "containLabel": true
+        },
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "结团猫砂",
+            "豆腐猫砂",
+            "混合猫砂",
+            "水晶猫砂"
+          ]
+        },
+        "yAxis": {
+          "type": "value",
+          "name": "客户数量"
+        },
+        "series": [
+          {
+            "name": "客户数",
+            "type": "bar",
+            "data": [
+              41,
+              29,
+              29,
+              21
+            ],
+            "itemStyle": {
+              "color": "#3498db"
+            },
+            "label": {
+              "show": true,
+              "position": "top"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "chart_id": "cooperation_trend",
+      "chart_type": "line",
+      "chart_title": "合作频次趋势",
+      "chart_data": {
+        "title": {
+          "text": "不同合作频次客户数量"
+        },
+        "tooltip": {
+          "trigger": "axis"
+        },
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "月",
+            "季度"
+          ],
+          "name": "合作频次"
+        },
+        "yAxis": {
+          "type": "value",
+          "name": "客户数量"
+        },
+        "series": [
+          {
+            "name": "客户数量",
+            "type": "line",
+            "data": [
+              38,
+              62
+            ],
+            "smooth": true,
+            "areaStyle": {},
+            "itemStyle": {
+              "color": "#2ecc71"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "chart_id": "comprehensive_score",
+      "chart_type": "radar",
+      "chart_title": "客户综合能力雷达图",
+      "chart_data": {
+        "title": {
+          "text": "A/B/C级客户多维能力对比"
+        },
+        "tooltip": {
+          "trigger": "item"
+        },
+        "legend": {
+          "data": [
+            "A级客户",
+            "B级客户",
+            "C级客户"
+          ]
+        },
+        "radar": {
+          "indicator": [
+            {
+              "name": "活跃度",
+              "max": 100
+            },
+            {
+              "name": "平均客单价",
+              "max": 5000
+            },
+            {
+              "name": "合作频次",
+              "max": 100
+            },
+            {
+              "name": "售后反馈",
+              "max": 100
+            },
+            {
+              "name": "竞争防御",
+              "max": 100
+            }
+          ]
+        },
+        "series": [
+          {
+            "name": "客户等级能力",
+            "type": "radar",
+            "data": [
+              {
+                "value": [
+                  85,
+                  4200,
+                  80,
+                  90,
+                  75
+                ],
+                "name": "A级客户",
+                "areaStyle": {
+                  "opacity": 0.1
+                }
+              },
+              {
+                "value": [
+                  65,
+                  2800,
+                  70,
+                  75,
+                  50
+                ],
+                "name": "B级客户",
+                "areaStyle": {
+                  "opacity": 0.1
+                }
+              },
+              {
+                "value": [
+                  55,
+                  2200,
+                  60,
+                  60,
+                  35
+                ],
+                "name": "C级客户",
+                "areaStyle": {
+                  "opacity": 0.1
+                }
+              }
+            ],
+            "lineStyle": {
+              "width": 3
+            }
+          }
+        ],
+        "color": [
+          "#e74c3c",
+          "#f39c12",
+          "#3498db"
+        ]
+      }
+    },
+    {
+      "chart_id": "region_payment",
+      "chart_type": "funnel",
+      "chart_title": "国内外客户支付方式对比",
+      "chart_data": {
+        "title": {
+          "text": "国外客户支付方式漏斗"
+        },
+        "tooltip": {
+          "trigger": "item",
+          "formatter": "{a} <br/>{b}: {c}人 ({d}%)"
+        },
+        "legend": {
+          "data": [
+            "预付",
+            "信用证",
+            "账期"
+          ]
+        },
+        "series": [
+          {
+            "name": "支付方式",
+            "type": "funnel",
+            "left": "10%",
+            "top": "10%",
+            "bottom": "10%",
+            "width": "80%",
+            "min": 0,
+            "max": 100,
+            "minSize": "0%",
+            "maxSize": "100%",
+            "sort": "descending",
+            "gap": 2,
+            "label": {
+              "show": true,
+              "position": "inside"
+            },
+            "data": [
+              {
+                "value": 42,
+                "name": "预付"
+              },
+              {
+                "value": 30,
+                "name": "信用证"
+              },
+              {
+                "value": 18,
+                "name": "账期"
+              }
+            ],
+            "itemStyle": {
+              "borderColor": "#fff",
+              "borderWidth": 1
+            }
+          }
+        ],
+        "color": [
+          "#9b59b6",
+          "#34495e",
+          "#1abc9c"
+        ]
+      }
+    }
+  ]
+}
+```
